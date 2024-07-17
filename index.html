@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+	<head>
+		<link rel="stylesheet" href="style/style.css">
+		<title> Sadovnicov Combat </title>
+	</head>
+
+	<body>
+		<div id="Karmas"> <center> Баллы кармы </center> </div>
+
+		<center><div class="KarmaContent"> <div id="KarmaScore"></div>/<div id="KarmaMax"></div> </div></center>
+		<br>
+		<center><div class="SadovnicovBtn">
+			<button class="SadovnicBtn", id="SadovnicovBtn"></button>
+		</div></center>
+		<br>
+		<center>
+			<div>Уровень Sadovnicova:</div>
+			<div id="SadovnicovLVL"></div>
+		</center>
+		<br><br>
+		<center><div class="LevelUp">
+			<button class="LevelUpBtn", id="LevelUpBtn">Прокачать</button>
+		</div></center>
+		<br>
+
+
+		<center><div id="alert_window">
+			<center><h1>Прошу обратить внимание:</h1></center>
+			<center><h3>Все совпадения с реальными личностями являются случайными</h3></center>
+			<cneter><h5>(для продолжения работы нажмите на экран)</h5></center>
+		</div></center>
+
+
+		<script>
+			var karma = 0;
+			const KarmaDoc = document.getElementById('KarmaScore');
+			KarmaDoc.innerHTML = karma;
+
+			var sadovnicovLvl = 1;
+			const KarmaMaxDoc = document.getElementById("KarmaMax");
+			const SadovnicovDoc = document.getElementById("SadovnicovLVL");
+			SadovnicovDoc.innerHTML = sadovnicovLvl;
+
+			const SadovnicovBtn = document.getElementById("SadovnicovBtn");
+			const AlertWindow = document.getElementById("alert_window");
+
+			if (sadovnicovLvl == 1) {
+				KarmaMaxDoc.innerHTML = 1000;
+				SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv1.jpg)";
+			} else if (sadovnicovLvl == 2) {
+				KarmaMaxDoc.innerHTML = 5000;
+				SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv2.jpg)";
+			} else if (sadovnicovLvl == 3) {
+				KarmaMaxDoc.innerHTML = 30000;
+				SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv3.jpg)";
+			} else if (sadovnicovLvl == 4) {
+				KarmaMaxDoc.innerHTML = "∞"
+				SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv4.jpg)";
+			}
+
+			document.getElementById('SadovnicovBtn').onclick = function() {
+				if (sadovnicovLvl == 1){
+					karma += 1;
+				} else if (sadovnicovLvl == 2) {
+					karma += 2;
+				} else if (sadovnicovLvl == 3) {
+					karma += 5;
+				} else if (sadovnicovLvl == 4) {
+					karma += 10;
+				}
+				KarmaDoc.innerHTML = karma;
+			}
+			document.getElementById('LevelUpBtn').onclick = function() {
+				if (sadovnicovLvl == 1 && karma >= 1000) {
+					karma -= 1000;
+					sadovnicovLvl += 1;
+					KarmaMaxDoc.innerHTML = 5000;
+					SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv2.jpg)";
+				} else if (sadovnicovLvl == 2 && karma >= 5000) {
+					karma -= 5000;
+					sadovnicovLvl += 1;
+					KarmaMaxDoc.innerHTML = 30000;
+					SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv3.jpg)";
+				} else if (sadovnicovLvl == 3 && karma >= 30000) {
+					karma -= 30000;
+					sadovnicovLvl += 1;
+					KarmaMaxDoc.innerHTML = "∞";
+					SadovnicovBtn.style.backgroundImage = "url(style/img/sadovnicov_lv4.jpg)";
+				}
+				KarmaDoc.innerHTML = karma;
+				SadovnicovDoc.innerHTML = sadovnicovLvl;
+			}
+			window.onclick = function(event) {
+				AlertWindow.style.display = "none";
+			}
+		</script>
+	</body>
+
+</html>
